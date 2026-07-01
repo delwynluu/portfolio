@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delwyn Luu — Data &amp; Business Analyst</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0f1e;
+      --bg2: #111827;
+      --bg3: #1a2236;
+      --border: #1e2d45;
+      --accent: #38bdf8;
+      --accent2: #818cf8;
+      --green: #34d399;
+      --amber: #fbbf24;
+      --pink: #f472b6;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --card: #131d2e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 100;
+      background: rgba(10,15,30,0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 62px;
+    }
+    .nav-logo {
+      font-weight: 700; font-size: 1.1rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: .9rem;
+      font-weight: 500; transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta {
+      background: var(--accent); color: #0a0f1e;
+      padding: .45rem 1.1rem; border-radius: 6px;
+      font-weight: 600; font-size: .85rem; text-decoration: none;
+      transition: opacity .2s;
+    }
+    .nav-cta:hover { opacity: .85; }
+
+    /* ── SECTION BASE ── */
+    section { padding: 6rem 0; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .8rem; color: var(--accent); letter-spacing: .12em;
+      text-transform: uppercase; margin-bottom: .6rem;
+    }
+    .section-title {
+      font-size: 2rem; font-weight: 800;
+      letter-spacing: -0.03em; margin-bottom: 1rem;
+    }
+    .section-divider {
+      width: 48px; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 2px; margin-bottom: 2.5rem;
+    }
+
+    /* ── FADE-IN ── */
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding-top: 62px;
+      background: radial-gradient(ellipse 70% 60% at 60% 40%, rgba(56,189,248,.07) 0%, transparent 65%),
+                  radial-gradient(ellipse 50% 50% at 20% 70%, rgba(129,140,248,.06) 0%, transparent 60%);
+    }
+    .hero-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center;
+    }
+    .hero-greeting {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent); font-size: .9rem; margin-bottom: 1rem;
+    }
+    .hero-name {
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      font-weight: 800; letter-spacing: -0.04em;
+      line-height: 1.08; margin-bottom: .9rem;
+    }
+    .hero-role {
+      font-size: 1.1rem; color: var(--muted);
+      margin-bottom: 1rem; display: flex; align-items: center; gap: .6rem; flex-wrap: wrap;
+    }
+    .role-title {
+      font-weight: 700; font-size: 1.15rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .open-badge {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: rgba(52,211,153,.12); border: 1px solid rgba(52,211,153,.3);
+      color: var(--green); font-size: .75rem; font-weight: 600;
+      padding: .25rem .7rem; border-radius: 100px;
+    }
+    .open-badge::before {
+      content: ''; width: 7px; height: 7px;
+      background: var(--green); border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; } 50% { opacity: .4; }
+    }
+    .hero-sub {
+      color: var(--muted); font-size: .95rem; line-height: 1.7;
+      margin-bottom: 1.8rem; max-width: 480px;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .7rem 1.5rem; border-radius: 8px;
+      font-weight: 600; font-size: .9rem; text-decoration: none;
+      transition: all .2s; cursor: pointer; border: none;
+    }
+    .btn-primary {
+      background: var(--accent); color: #0a0f1e;
+    }
+    .btn-primary:hover { opacity: .88; transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+    .btn-ghost {
+      background: rgba(56,189,248,.1); color: var(--accent);
+      border: 1px solid rgba(56,189,248,.25);
+    }
+    .btn-ghost:hover { background: rgba(56,189,248,.18); transform: translateY(-1px); }
+
+    /* hero right */
+    .hero-right {
+      display: flex; flex-direction: column; align-items: center; gap: 1.8rem;
+    }
+    .avatar-wrap {
+      position: relative; width: 200px; height: 200px;
+    }
+    .avatar-ring {
+      position: absolute; inset: -6px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      animation: spin 8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .avatar-mask {
+      position: absolute; inset: 3px;
+      background: var(--bg); border-radius: 50%;
+    }
+    .avatar-img {
+      position: absolute; inset: 6px;
+      border-radius: 50%; object-fit: cover;
+      width: calc(100% - 12px); height: calc(100% - 12px);
+    }
+    .hero-stats-wrapper { width: 100%; max-width: 340px; }
+    .hero-stats-label {
+      font-size: .65rem; font-weight: 600; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: .5rem; text-align: center;
+    }
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: .8rem; width: 100%;
+    }
+    .hero-stat {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1rem .8rem; text-align: center;
+    }
+    .hero-stat-num {
+      font-size: 1.4rem; font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero-stat-label { font-size: .72rem; color: var(--muted); margin-top: .2rem; }
+
+    .hero-links { display: flex; gap: .8rem; }
+    .hero-link {
+      display: flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 8px; color: var(--muted); text-decoration: none;
+      font-size: 1.1rem; transition: all .2s;
+    }
+    .hero-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    /* ── ABOUT ── */
+    #about { background: var(--bg2); }
+    .about-grid {
+      display: grid; grid-template-columns: 1.2fr 1fr; gap: 3.5rem; align-items: start;
+    }
+    .about-text p { color: var(--muted); line-height: 1.8; margin-bottom: 1.1rem; }
+    .about-text p strong { color: var(--text); }
+    .interest-row {
+      display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.5rem;
+    }
+    .interest-chip {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: rgba(56,189,248,.08); border: 1px solid rgba(56,189,248,.18);
+      color: var(--accent); font-size: .8rem; font-weight: 500;
+      padding: .35rem .85rem; border-radius: 100px;
+    }
+
+    .about-cards { display: flex; flex-direction: column; gap: 1rem; }
+    .about-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.3rem 1.5rem;
+    }
+    .about-card-icon { font-size: 1.4rem; margin-bottom: .5rem; }
+    .about-card h4 { font-size: .95rem; font-weight: 700; margin-bottom: .3rem; }
+    .about-card p { font-size: .85rem; color: var(--muted); line-height: 1.6; }
+
+    /* tiktok card */
+    .tiktok-card {
+      background: linear-gradient(135deg, rgba(0,0,0,.6), rgba(30,10,50,.8));
+      border: 1px solid rgba(244,114,182,.25);
+    }
+    .tiktok-card .about-card-icon { font-size: 1.4rem; }
+    .tiktok-stats { display: flex; gap: 1.5rem; margin-top: .7rem; }
+    .tiktok-stat { }
+    .tiktok-stat-num { font-size: 1.1rem; font-weight: 700; color: var(--pink); }
+    .tiktok-stat-label { font-size: .72rem; color: var(--muted); }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+    }
+    .skill-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.5rem;
+      transition: border-color .2s, transform .2s;
+    }
+    .skill-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .skill-icon { font-size: 1.6rem; margin-bottom: .8rem; }
+    .skill-card h4 { font-size: .9rem; font-weight: 700; margin-bottom: .8rem; color: var(--text); }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .skill-tag {
+      background: rgba(30,45,69,.6); border: 1px solid var(--border);
+      color: var(--muted); font-size: .75rem; font-weight: 500;
+      padding: .25rem .6rem; border-radius: 6px;
+    }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--bg2); }
+    .exp-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 2rem 2.5rem;
+      position: relative; overflow: hidden;
+    }
+    .exp-card::before {
+      content: ''; position: absolute;
+      left: 0; top: 0; bottom: 0; width: 4px;
+      background: linear-gradient(180deg, var(--accent), var(--accent2));
+      border-radius: 2px 0 0 2px;
+    }
+    .exp-header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 1rem; margin-bottom: 1.5rem;
+    }
+    .exp-company { display: flex; align-items: center; gap: 1rem; }
+    .exp-logo {
+      width: 48px; height: 48px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; font-weight: 800; color: #0a0f1e;
+      flex-shrink: 0;
+    }
+    .exp-org { font-size: 1.1rem; font-weight: 700; }
+    .exp-role {
+      font-size: .85rem; color: var(--accent); font-weight: 500; margin-top: .2rem;
+    }
+    .exp-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem; color: var(--muted); text-align: right;
+    }
+    .exp-meta .duration {
+      background: rgba(56,189,248,.1); border: 1px solid rgba(56,189,248,.2);
+      color: var(--accent); padding: .25rem .7rem; border-radius: 100px;
+      font-size: .75rem; display: inline-block; margin-top: .4rem;
+    }
+
+    .exp-section { margin-bottom: 1.5rem; }
+    .exp-section h4 {
+      font-size: .75rem; text-transform: uppercase; letter-spacing: .1em;
+      color: var(--accent2); font-weight: 600; margin-bottom: .7rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .exp-section p { color: var(--muted); font-size: .9rem; line-height: 1.7; }
+
+    .exp-steps { display: flex; flex-direction: column; gap: .6rem; }
+    .exp-step {
+      display: flex; gap: .8rem; align-items: flex-start;
+    }
+    .step-num {
+      flex-shrink: 0; width: 22px; height: 22px;
+      background: rgba(56,189,248,.15); border: 1px solid rgba(56,189,248,.3);
+      color: var(--accent); border-radius: 50%;
+      font-size: .7rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step-text { font-size: .88rem; color: var(--muted); line-height: 1.6; }
+    .step-text strong { color: var(--text); }
+
+    .exp-results {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: .8rem;
+    }
+    .result-card {
+      background: rgba(56,189,248,.05); border: 1px solid rgba(56,189,248,.15);
+      border-radius: 10px; padding: 1rem .8rem; text-align: center;
+    }
+    .result-num {
+      font-size: 1.2rem; font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .result-label { font-size: .72rem; color: var(--muted); margin-top: .2rem; line-height: 1.4; }
+
+    /* dashboard mock */
+    .dashboard-mock {
+      margin-top: 1.5rem;
+      background: #0d1829; border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden;
+    }
+    .dash-titlebar {
+      background: #111f35; border-bottom: 1px solid var(--border);
+      padding: .6rem 1rem;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #ff5f57; }
+    .dot-y { background: #febc2e; }
+    .dot-g { background: #28c840; }
+    .dash-title {
+      flex: 1; text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem; color: var(--muted);
+    }
+    .dash-body { padding: 1rem; }
+    .dash-kpis {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: .7rem; margin-bottom: 1rem;
+    }
+    .dash-kpi {
+      background: #131d2e; border: 1px solid #1e3050;
+      border-radius: 8px; padding: .8rem;
+    }
+    .dash-kpi-label { font-size: .65rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+    .dash-kpi-val { font-size: 1.1rem; font-weight: 800; color: var(--accent); margin: .2rem 0; }
+    .dash-kpi-change { font-size: .68rem; }
+    .dash-kpi-change.neg { color: #f87171; }
+    .dash-kpi-change.pos { color: var(--green); }
+    .dash-charts {
+      display: grid; grid-template-columns: 2fr 1fr; gap: .7rem;
+    }
+    .dash-chart {
+      background: #131d2e; border: 1px solid #1e3050;
+      border-radius: 8px; padding: .8rem;
+    }
+    .dash-chart-title { font-size: .65rem; color: var(--muted); margin-bottom: .6rem; text-transform: uppercase; letter-spacing: .08em; }
+    .bar-chart { display: flex; align-items: flex-end; gap: 3px; height: 50px; }
+    .bar {
+      flex: 1; border-radius: 3px 3px 0 0;
+      background: linear-gradient(180deg, var(--accent), var(--accent2));
+      opacity: .7;
+    }
+    .pie-mock {
+      width: 60px; height: 60px; border-radius: 50%;
+      background: conic-gradient(var(--accent) 0% 40%, var(--accent2) 40% 65%, var(--green) 65% 80%, #f87171 80% 100%);
+      margin: 0 auto;
+    }
+    .dash-tech-row {
+      display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1rem;
+    }
+    .dash-tech {
+      background: rgba(56,189,248,.08); border: 1px solid rgba(56,189,248,.15);
+      color: var(--accent); font-size: .68rem; font-family: 'JetBrains Mono', monospace;
+      padding: .2rem .55rem; border-radius: 4px;
+    }
+    .exp-links { display: flex; gap: .8rem; margin-top: 1.5rem; flex-wrap: wrap; }
+
+    /* ── PROJECTS ── */
+    .domain-section { margin-bottom: 3.5rem; }
+    .domain-header {
+      display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;
+    }
+    .domain-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(56,189,248,.08); border: 1px solid rgba(56,189,248,.2);
+      color: var(--accent); font-size: .78rem; font-weight: 600;
+      padding: .4rem 1rem; border-radius: 100px;
+    }
+    .domain-badge.bi {
+      background: rgba(129,140,248,.08); border-color: rgba(129,140,248,.2);
+      color: var(--accent2);
+    }
+    .domain-badge.ba {
+      background: rgba(251,191,36,.08); border-color: rgba(251,191,36,.2);
+      color: var(--amber);
+    }
+    .domain-badge.web {
+      background: rgba(52,211,153,.08); border-color: rgba(52,211,153,.2);
+      color: var(--green);
+    }
+    .domain-line {
+      flex: 1; height: 1px;
+      background: linear-gradient(90deg, var(--border), transparent);
+    }
+
+    .proj-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden;
+      transition: border-color .2s, transform .2s;
+    }
+    .proj-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .proj-card.bi-card:hover { border-color: var(--accent2); }
+    .proj-card.ba-card:hover { border-color: var(--amber); }
+    .proj-card.web-card:hover { border-color: var(--green); }
+
+    .proj-card-header {
+      padding: 1.5rem 1.8rem 0;
+    }
+    .proj-title-row {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      margin-bottom: .6rem;
+    }
+    .proj-title { font-size: 1.05rem; font-weight: 700; }
+    .proj-status {
+      font-size: .7rem; font-weight: 600; padding: .2rem .6rem;
+      border-radius: 100px; white-space: nowrap;
+    }
+    .status-done {
+      background: rgba(52,211,153,.12); color: var(--green); border: 1px solid rgba(52,211,153,.25);
+    }
+    .status-wip {
+      background: rgba(251,191,36,.1); color: var(--amber); border: 1px solid rgba(251,191,36,.25);
+    }
+    .proj-desc { font-size: .87rem; color: var(--muted); line-height: 1.65; margin-bottom: 1rem; }
+
+    .rar-section {
+      padding: 0 1.8rem 1.5rem;
+    }
+    .rar-row {
+      display: flex; gap: .7rem; margin-bottom: .5rem; align-items: flex-start;
+    }
+    .rar-label {
+      flex-shrink: 0; width: 60px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .67rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .08em;
+      padding: .2rem .4rem; border-radius: 4px; margin-top: .1rem;
+      text-align: center;
+    }
+    .rar-role { background: rgba(56,189,248,.1); color: var(--accent); }
+    .rar-action { background: rgba(129,140,248,.1); color: var(--accent2); }
+    .rar-result { background: rgba(52,211,153,.1); color: var(--green); }
+    .rar-text { font-size: .85rem; color: var(--muted); line-height: 1.6; }
+    .rar-text strong { color: var(--text); }
+
+    .proj-footer {
+      padding: 1rem 1.8rem 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: .8rem;
+    }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .proj-tag {
+      background: rgba(30,45,69,.6); border: 1px solid var(--border);
+      color: var(--muted); font-size: .72rem; font-weight: 500;
+      padding: .2rem .55rem; border-radius: 5px;
+    }
+    .proj-links { display: flex; gap: .6rem; }
+    .proj-link {
+      display: inline-flex; align-items: center; gap: .3rem;
+      padding: .35rem .9rem; border-radius: 6px;
+      font-size: .78rem; font-weight: 600; text-decoration: none;
+      transition: all .2s;
+    }
+    .proj-link-primary {
+      background: var(--accent); color: #0a0f1e;
+    }
+    .proj-link-primary:hover { opacity: .85; }
+    .proj-link-secondary {
+      background: rgba(56,189,248,.1); color: var(--accent);
+      border: 1px solid rgba(56,189,248,.25);
+    }
+    .proj-link-secondary:hover { background: rgba(56,189,248,.18); }
+    .proj-link-bi {
+      background: rgba(129,140,248,.1); color: var(--accent2);
+      border: 1px solid rgba(129,140,248,.25);
+    }
+    .proj-link-bi:hover { background: rgba(129,140,248,.18); }
+    .proj-link-ba {
+      background: rgba(251,191,36,.1); color: var(--amber);
+      border: 1px solid rgba(251,191,36,.25);
+    }
+    .proj-link-ba:hover { background: rgba(251,191,36,.18); }
+    .proj-link-web {
+      background: rgba(52,211,153,.1); color: var(--green);
+      border: 1px solid rgba(52,211,153,.25);
+    }
+    .proj-link-web:hover { background: rgba(52,211,153,.18); }
+
+    /* ── EDUCATION ── */
+    #education { background: var(--bg2); }
+    .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .edu-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 1.6rem;
+      position: relative; overflow: hidden;
+      transition: border-color .2s;
+    }
+    .edu-card:hover { border-color: var(--accent2); }
+    .edu-degree { font-size: 1rem; font-weight: 700; margin-bottom: .25rem; }
+    .edu-school { color: var(--accent); font-size: .88rem; font-weight: 500; margin-bottom: .6rem; }
+    .edu-year { font-family: 'JetBrains Mono', monospace; font-size: .78rem; color: var(--muted); margin-bottom: 1rem; }
+    .edu-wam {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: linear-gradient(135deg, rgba(56,189,248,.1), rgba(129,140,248,.1));
+      border: 1px solid rgba(56,189,248,.2);
+      padding: .4rem 1rem; border-radius: 100px;
+      font-weight: 700; font-size: .85rem;
+      background-clip: padding-box;
+    }
+    .edu-wam-num {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .edu-wam-label { font-size: .8rem; color: var(--muted); }
+    .edu-units { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: .4rem; }
+    .edu-unit {
+      background: rgba(30,45,69,.6); border: 1px solid var(--border);
+      color: var(--muted); font-size: .72rem;
+      padding: .2rem .55rem; border-radius: 5px;
+    }
+
+    /* ── CONTACT ── */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+    .contact-text h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: .8rem; }
+    .contact-text p { color: var(--muted); line-height: 1.75; margin-bottom: 1.2rem; }
+    .contact-items { display: flex; flex-direction: column; gap: .7rem; }
+    .contact-item {
+      display: flex; align-items: center; gap: .8rem;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: .9rem 1.1rem;
+      text-decoration: none; color: var(--text);
+      transition: border-color .2s, transform .2s;
+    }
+    .contact-item:hover { border-color: var(--accent); transform: translateX(4px); }
+    .contact-icon { font-size: 1.2rem; }
+    .contact-label { font-size: .78rem; color: var(--muted); }
+    .contact-val { font-size: .9rem; font-weight: 500; }
+    .contact-form {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.8rem;
+    }
+    .contact-form h4 { font-size: 1rem; font-weight: 700; margin-bottom: 1.2rem; }
+    .form-row { display: flex; gap: .8rem; margin-bottom: .8rem; }
+    .form-group { flex: 1; display: flex; flex-direction: column; gap: .4rem; }
+    .form-group label { font-size: .8rem; color: var(--muted); font-weight: 500; }
+    .form-group input, .form-group textarea {
+      background: var(--bg3); border: 1px solid var(--border);
+      color: var(--text); padding: .65rem .9rem; border-radius: 8px;
+      font-family: 'Inter', sans-serif; font-size: .88rem;
+      transition: border-color .2s; outline: none; width: 100%;
+    }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .btn-full { width: 100%; justify-content: center; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg2); border-top: 1px solid var(--border);
+      padding: 2rem 0; text-align: center;
+    }
+    footer p { color: var(--muted); font-size: .85rem; }
+    footer span { color: var(--accent); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; text-align: center; }
+      .hero-right { order: -1; }
+      .hero-sub { margin: 0 auto 1.8rem; }
+      .hero-btns { justify-content: center; }
+      .about-grid { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: repeat(2,1fr); }
+      .exp-results { grid-template-columns: repeat(2,1fr); }
+      .edu-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .dash-charts { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .skills-grid { grid-template-columns: 1fr; }
+      .exp-results { grid-template-columns: repeat(2,1fr); }
+      .hero-stats { grid-template-columns: repeat(3,1fr); }
+      .dash-kpis { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════ NAV ═══════════════════════ -->
+<nav>
+  <div class="nav-logo">DL.</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="DELWYNLUU.DA.pdf" download class="nav-cta">↓ Resume</a>
+</nav>
+
+<!-- ═══════════════════════ HERO ═══════════════════════ -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner fade-in visible">
+
+      <div class="hero-left">
+        <div class="hero-greeting">// hello, world 👋</div>
+        <h1 class="hero-name">Delwyn Luu</h1>
+        <div class="hero-role">
+          <span class="role-title">Data · Business Analyst · IT/AI Consultant</span>
+          <span class="open-badge">Open to Work</span>
+        </div>
+        <p class="hero-sub">
+          Fresh BBA graduate from Deakin University with hands-on experience building cloud data pipelines, BI dashboards, and business intelligence solutions. Based in Melbourne — open to <strong>Data Analyst</strong>, <strong>Business Analyst</strong>, <strong>BI/Reporting Analyst</strong>, and <strong>IT/AI Consultant</strong> roles across Australia and Vietnam.
+        </p>
+        <div class="hero-btns">
+          <a href="#projects" class="btn btn-primary">View My Work</a>
+          <a href="DELWYNLUU.DA.pdf" download class="btn btn-ghost">↓ Download CV</a>
+          <a href="#contact" class="btn btn-outline">Get in Touch</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="avatar-wrap">
+          <div class="avatar-ring"></div>
+          <div class="avatar-mask"></div>
+          <img
+            class="avatar-img"
+            src="profile.png"
+            alt="Delwyn Luu"
+            onerror="this.src='https://avatars.githubusercontent.com/u/207435969?v=4'"
+          />
+        </div>
+        <div class="hero-stats-wrapper">
+        <div class="hero-stats-label">// by the numbers</div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-num">7</div>
+            <div class="hero-stat-label">AWS Services<br>Integrated</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">100%</div>
+            <div class="hero-stat-label">Manual Reporting<br>Eliminated</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">4</div>
+            <div class="hero-stat-label">Analytics<br>Projects</div>
+          </div>
+        </div>
+        </div>
+        <div class="hero-links">
+          <a href="https://github.com/delwynluu" target="_blank" class="hero-link" title="GitHub">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.483 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.34-3.369-1.34-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .269.18.58.688.482A10.001 10.001 0 0 0 22 12c0-5.523-4.477-10-10-10z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/delwyn-luu-234286248/" target="_blank" class="hero-link" title="LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@thuwluuu" target="_blank" class="hero-link" title="TikTok">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.65a8.18 8.18 0 0 0 4.77 1.52V6.7a4.85 4.85 0 0 1-1-.01z"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ ABOUT ═══════════════════════ -->
+<section id="about">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-label">// about me</div>
+      <h2 class="section-title">Beyond the Data</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="about-grid fade-in">
+      <div class="about-text">
+        <p>
+          I'm <strong>Delwyn Luu</strong> — a fresh Business Analytics graduate from Deakin University, Melbourne. I grew up in a small town in Vietnam, moved alone to Australia three years ago, and figured out university life from scratch. That kind of start teaches you to be resourceful, adaptable, and comfortable doing hard things without a map.
+        </p>
+        <p>
+          My analytics work sits at the intersection of <strong>data engineering</strong> and <strong>business intelligence</strong> — I care just as much about building the clean, reliable pipeline as I do about what the dashboard actually tells a stakeholder. During my internship at Cultural Infusion, I built an end-to-end ETL pipeline on AWS that replaced hours of weekly manual reporting with a live, self-updating QuickSight dashboard. That's the kind of work I want to keep doing.
+        </p>
+        <p>
+          I'm currently based in Melbourne on a <strong>485 Graduate Visa</strong> (valid 2026–2028), open to full-time or internship roles in Australia or Vietnam — Data Analyst, Business Analyst, BI Analyst, IT/AI Consultant, or Entry Data Engineer.
+        </p>
+        <div class="interest-row">
+          <span class="interest-chip">🇦🇺 Melbourne</span>
+          <span class="interest-chip">☕ Café Explorer</span>
+          <span class="interest-chip">🎤 Singing</span>
+          <span class="interest-chip">📊 Self-Study Data</span>
+          <span class="interest-chip">🎵 Music</span>
+          <span class="interest-chip">🍜 FnB Enthusiast</span>
+        </div>
+      </div>
+      <div class="about-cards">
+
+        <div class="about-card tiktok-card">
+          <div class="about-card-icon">🎬</div>
+          <h4>Melbourne Life on TikTok</h4>
+          <p>I document daily life in Melbourne — café discoveries, food spots, new neighbourhoods. Hit some viral moments along the way.</p>
+          <div class="tiktok-stats">
+            <div class="tiktok-stat">
+              <div class="tiktok-stat-num">8K+</div>
+              <div class="tiktok-stat-label">Followers</div>
+            </div>
+            <div class="tiktok-stat">
+              <div class="tiktok-stat-num">500K+</div>
+              <div class="tiktok-stat-label">Best video views</div>
+            </div>
+            <div class="tiktok-stat">
+              <div class="tiktok-stat-num">100K+</div>
+              <div class="tiktok-stat-label">Peak likes</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-card" style="border-color: rgba(251,191,36,.25); background: linear-gradient(135deg, rgba(251,191,36,.04), rgba(129,140,248,.04));">
+          <div class="about-card-icon">🏆</div>
+          <h4>Sing Out Loud 2022 — Most Favourite Contestant</h4>
+          <p>Competed in <em>Sing Out Loud 2022</em>, an English singing competition hosted by Swinburne Vietnam. Placed in the <strong>Top 10 among hundreds of contestants</strong> and won <strong>Most Favourite Contestant</strong> — voted by the audience.</p>
+          <p style="margin-top:.6rem; font-size:.82rem; color:var(--muted);">I was 18, packed up alone, and flew to Ho Chi Minh City to compete. Didn't know anyone. Figured it out anyway.</p>
+          <div style="display:flex; gap:.6rem; margin-top:.9rem; flex-wrap:wrap;">
+            <span style="background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.3);color:var(--amber);font-size:.72rem;font-weight:600;padding:.2rem .6rem;border-radius:100px;">🏆 Most Favourite Contestant</span>
+            <span style="background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.25);color:var(--accent);font-size:.72rem;font-weight:600;padding:.2rem .6rem;border-radius:100px;">Top 10 · Audience Vote</span>
+          </div>
+        </div>
+
+        <div class="about-card">
+          <div class="about-card-icon">☕</div>
+          <h4>FnB Startup — Building from the Ground Up</h4>
+          <p>Long-term goal: launch an FnB startup in Vietnam — built properly, with a booking system, website, and operations I design and run myself. The booking system and web page are already in progress.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ SKILLS ═══════════════════════ -->
+<section id="skills">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-label">// what I work with</div>
+      <h2 class="section-title">Skills &amp; Tools</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="skills-grid fade-in">
+
+      <div class="skill-card">
+        <div class="skill-icon">☁️</div>
+        <h4>Cloud &amp; Data Engineering</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">AWS Lambda</span>
+          <span class="skill-tag">S3</span>
+          <span class="skill-tag">Glue</span>
+          <span class="skill-tag">Athena</span>
+          <span class="skill-tag">EventBridge</span>
+          <span class="skill-tag">CloudWatch</span>
+          <span class="skill-tag">ETL Pipelines</span>
+          <span class="skill-tag">REST APIs</span>
+          <span class="skill-tag">OAuth 2.0</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">📊</div>
+        <h4>Business Intelligence</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">Amazon QuickSight</span>
+          <span class="skill-tag">Power BI</span>
+          <span class="skill-tag">DAX</span>
+          <span class="skill-tag">Tableau</span>
+          <span class="skill-tag">Dashboard Design</span>
+          <span class="skill-tag">KPI Reporting</span>
+          <span class="skill-tag">Stakeholder Reports</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🐍</div>
+        <h4>Programming &amp; Analytics</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Pandas</span>
+          <span class="skill-tag">NumPy</span>
+          <span class="skill-tag">Matplotlib</span>
+          <span class="skill-tag">Prophet</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Excel (Advanced)</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🗄️</div>
+        <h4>Databases &amp; CRM</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">Supabase</span>
+          <span class="skill-tag">Zoho CRM</span>
+          <span class="skill-tag">CRM API Integration</span>
+          <span class="skill-tag">Data Modelling</span>
+          <span class="skill-tag">Schema Design</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🌐</div>
+        <h4>Web Development</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">HTML / CSS</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">Node.js</span>
+          <span class="skill-tag">Express.js</span>
+          <span class="skill-tag">React (learning)</span>
+          <span class="skill-tag">Git / GitHub</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🧩</div>
+        <h4>Business Analysis</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">Requirements Gathering</span>
+          <span class="skill-tag">BRD / FRD Writing</span>
+          <span class="skill-tag">User Stories</span>
+          <span class="skill-tag">Acceptance Criteria</span>
+          <span class="skill-tag">Process Mapping</span>
+          <span class="skill-tag">BPMN</span>
+          <span class="skill-tag">ERD</span>
+          <span class="skill-tag">UML / Use Case Diagrams</span>
+          <span class="skill-tag">As-Is / To-Be Analysis</span>
+          <span class="skill-tag">Gap Analysis</span>
+          <span class="skill-tag">Feasibility Analysis</span>
+          <span class="skill-tag">Stakeholder Management</span>
+          <span class="skill-tag">Market Research</span>
+          <span class="skill-tag">Lucidchart / Draw.io</span>
+          <span class="skill-tag">Confluence / Notion</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ EXPERIENCE ═══════════════════════ -->
+<section id="experience">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-label">// where I've worked</div>
+      <h2 class="section-title">Professional Experience</h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="exp-card fade-in">
+      <div class="exp-header">
+        <div class="exp-company">
+          <div class="exp-logo">CI</div>
+          <div>
+            <div class="exp-org">Cultural Infusion</div>
+            <div class="exp-role">Data Analyst Intern — Education Analytics</div>
+          </div>
+        </div>
+        <div class="exp-meta">
+          Melbourne, Australia
+          <div class="duration">Sep 2025 – Apr 2026 · 7 months</div>
+        </div>
+      </div>
+
+      <div class="exp-section">
+        <h4>// the problem</h4>
+        <p>The Education Team spent hours every week manually downloading CRM data, cleaning it in Excel, and building reports — only for those reports to be outdated the moment they were shared. Data was siloed, inconsistent, and gave leadership no real-time view of revenue or program delivery.</p>
+      </div>
+
+      <div class="exp-section">
+        <h4>// what I built</h4>
+        <div class="exp-steps">
+          <div class="exp-step">
+            <div class="step-num">1</div>
+            <div class="step-text"><strong>Zoho CRM API integration</strong> — handled OAuth 2.0 auth flow, field-mapping, schema design, pagination, and incremental loading so only updated records are re-fetched each run.</div>
+          </div>
+          <div class="exp-step">
+            <div class="step-num">2</div>
+            <div class="step-text"><strong>AWS ETL pipeline</strong> — Lambda (scheduled trigger) → S3 (raw JSON storage) → Glue (schema inference + transform) → Athena (queryable data catalogue with 3 derived SQL views).</div>
+          </div>
+          <div class="exp-step">
+            <div class="step-num">3</div>
+            <div class="step-text"><strong>QuickSight live dashboard</strong> — connected directly to Athena via Direct Query (no extract), auto-refreshes weekly via EventBridge at Monday 2AM. Four dashboard pages: Executive KPI, Revenue by Stage &amp; State, Program Details, Quarterly Breakdown.</div>
+          </div>
+          <div class="exp-step">
+            <div class="step-num">4</div>
+            <div class="step-text"><strong>Cross-functional collaboration</strong> — worked with technical mentors, developers, the CRM admin, and the AI Lead to resolve data quality issues, field mismatches, and API authorisation challenges.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-section">
+        <h4>// results</h4>
+        <div class="exp-results">
+          <div class="result-card">
+            <div class="result-num">10+ yrs</div>
+            <div class="result-label">Historical CRM data now queryable in seconds</div>
+          </div>
+          <div class="result-card">
+            <div class="result-num">7</div>
+            <div class="result-label">AWS services orchestrated end-to-end</div>
+          </div>
+          <div class="result-card">
+            <div class="result-num">0</div>
+            <div class="result-label">Manual hours for weekly reporting post-deploy</div>
+          </div>
+          <div class="result-card">
+            <div class="result-num">Live</div>
+            <div class="result-label">Self-service dashboard for Education Team + leadership</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:1.5rem; background:rgba(56,189,248,.05); border:1px dashed rgba(56,189,248,.2); border-radius:10px; padding:1rem 1.4rem; display:flex; align-items:center; gap:.8rem;">
+        <span style="font-size:1.2rem;">📊</span>
+        <p style="font-size:.85rem; color:var(--muted); margin:0;">Dashboard screenshots available upon request — withheld here out of respect for client data confidentiality.</p>
+      </div>
+
+      <div class="exp-links">
+        <a href="https://github.com/delwynluu/zoho_crm_culturalinfusion" target="_blank" class="btn btn-ghost">📁 View Repository</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════ PROJECTS ═══════════════════════ -->
+<section id="projects">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-label">// what I've built</div>
+      <h2 class="section-title">Projects by Domain</h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <!-- ── DOMAIN 1: WEB DEVELOPMENT ── -->
+    <div class="domain-section fade-in">
+      <div class="domain-header">
+        <span class="domain-badge web">🌐 Web Development &amp; Full-Stack</span>
+        <div class="domain-line"></div>
+      </div>
+
+      <div class="proj-card web-card">
+        <div class="proj-card-header">
+          <div class="proj-title-row">
+            <div class="proj-title">Café Booking &amp; Reservation System</div>
+            <span class="proj-status status-wip">⚡ In Progress</span>
+          </div>
+          <p class="proj-desc">
+            A full-stack café booking system built from scratch as the technical foundation for my future FnB startup in Vietnam. The web page is complete and polished; the backend (Node.js + PostgreSQL) is in active development. Everything — the system, the design, the ops logic — built by me.
+          </p>
+        </div>
+
+        <div class="rar-section">
+          <div class="rar-row">
+            <span class="rar-label rar-role">Role</span>
+            <div class="rar-text">Solo developer — product design, frontend, backend, and database design.</div>
+          </div>
+          <div class="rar-row">
+            <span class="rar-label rar-action">Actions</span>
+            <div class="rar-text">Built a clean, responsive café website frontend (HTML/CSS/JS). Designed a <strong>Node.js + Express</strong> REST API backend with <strong>PostgreSQL (Supabase)</strong> for real-time availability tracking and reservation management. Explored <strong>Prophet (Python)</strong> for demand forecasting of peak booking times.</div>
+          </div>
+          <div class="rar-row">
+            <span class="rar-label rar-result">Results</span>
+            <div class="rar-text">Web page complete and live. Backend booking logic in progress. Directly feeds my long-term goal of launching an FnB startup — with the full tech stack self-designed and built.</div>
+          </div>
+        </div>
+
+        <div class="proj-footer">
+          <div class="proj-tags">
+            <span class="proj-tag">Node.js</span>
+            <span class="proj-tag">Express.js</span>
+            <span class="proj-tag">PostgreSQL</span>
+            <span class="proj-tag">Supabase</span>
+            <span class="proj-tag">HTML / CSS / JS</span>
+            <span class="proj-tag">Python (Prophet)</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/delwynluu/frontend.cafe-" target="_blank" class="proj-link proj-link-web">🌐 Frontend</a>
+            <a href="https://github.com/delwynluu/bookingsystem-" target="_blank" class="proj-link proj-link-secondary">⚙️ Backend</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── DOMAIN 2: DATA ENGINEERING ── -->
+    <div class="domain-section fade-in">
+      <div class="domain-header">
+        <span class="domain-badge">⚙️ Data Engineering &amp; Cloud</span>
+        <div class="domain-line"></div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-card-header">
+          <div class="proj-title-row">
+            <div class="proj-title">Zoho CRM ETL Pipeline (Cultural Infusion)</div>
+            <span class="proj-status status-done">✓ Completed</span>
+          </div>
+          <p class="proj-desc">
+            Cloud-native ETL pipeline that pulls live data from Zoho CRM via REST API, transforms it through AWS Glue, and loads it into Athena as a queryable analytics catalogue — powering a live QuickSight dashboard. Built solo during a 7-month internship at Cultural Infusion.
+          </p>
+        </div>
+
+        <div class="rar-section">
+          <div class="rar-row">
+            <span class="rar-label rar-role">Role</span>
+            <div class="rar-text">Sole pipeline architect and developer — designed and built the full stack from API auth through to the business-facing dashboard.</div>
+          </div>
+          <div class="rar-row">
+            <span class="rar-label rar-action">Actions</span>
+            <div class="rar-text">Implemented <strong>Zoho CRM OAuth 2.0</strong> integration with incremental loading (only changed records re-fetched). Architected <strong>Lambda → S3 → Glue → Athena</strong> pipeline. Built 3 SQL views in Athena (deals_clean, deals_latest, deals_simplified_v2). Connected QuickSight via Direct Query. Scheduled weekly refresh via <strong>EventBridge</strong>. Monitored with <strong>CloudWatch</strong>.</div>
+          </div>
+          <div class="rar-row">
+            <span class="rar-label rar-result">Results</span>
+            <div class="rar-text">Eliminated manual weekly Excel reporting. 10+ years of historical CRM data now queryable in seconds. Dashboard used live by Education Team and management. <strong>7 AWS services</strong> orchestrated with zero ongoing manual effort.</div>
+          </div>
+        </div>
+
+        <div class="proj-footer">
+          <div class="proj-tags">
+            <span class="proj-tag">Python</span>
+            <span class="proj-tag">AWS Lambda</span>
+            <span class="proj-tag">S3</span>
+            <span class="proj-tag">Glue</span>
+            <span class="proj-tag">Athena</span>
+            <span class="proj-tag">QuickSight</span>
+            <span class="proj-tag">Zoho CRM API</span>
+            <span class="proj-tag">OAuth 2.0</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/delwynluu/zoho_crm_culturalinfusion" target="_blank" class="proj-link proj-link-secondary">📁 GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── DOMAIN 3: BUSINESS INTELLIGENCE ── -->
+    <div class="domain-section fade-in">
+      <div class="domain-header">
+        <span class="domain-badge bi">📊 Business Intelligence &amp; Reporting</span>
+        <div class="domain-line"></div>
+      </div>
+
+      <div class="proj-card bi-card">
+        <div class="proj-card-header">
+          <div class="proj-title-row">
+            <div class="proj-title">Retail Sales BI Dashboard</div>
+            <span class="proj-status status-done">✓ Completed</span>
+          </div>
+          <p class="proj-desc">
+            End-to-end Power BI dashboard analysing four years of retail sales data across global regions — covering revenue trends, customer segmentation, shipment performance, and profitability breakdowns. Built custom DAX measures for YoY growth, profit margin, and customer retention metrics.
+          </p>
+        </div>
+
+        <div class="rar-section">
+          <div class="rar-row">
+            <span class="rar-label rar-role">Role</span>
+            <div class="rar-text"><strong>Team Lead</strong> in a group of 4 — oversaw end-to-end delivery: data cleaning, modelling, DAX development, and dashboard design.</div>
+          </div>
+          <div class="rar-row">
+            <span class="rar-label rar-action">Actions</span>
+            <div class="rar-text">Cleaned and modelled a multi-year retail dataset (2020–2023). Built a relational data model with fact/dimension tables. Wrote <strong>custom DAX measures</strong> for running totals, YoY %, profit margin, and customer rank. Designed 3 report pages: Executive Summary, Regional Performance, Customer Analysis — with drill-through and cross-filter interactivity.</div>
+          </div>
+          <div class="rar-row">
+            <span class="rar-label rar-result">Results</span>
+            <div class="rar-text"><strong>22,000+ shipments</strong> analysed across 4 years · <strong>$11.73M total revenue</strong> visualised by region, product, and time · <strong>APAC</strong> identified as top-performing region at <strong>$3.59M</strong> · 1,500+ customers segmented by lifetime value.</div>
+          </div>
+        </div>
+
+        <div class="proj-footer">
+          <div class="proj-tags">
+            <span class="proj-tag">Power BI</span>
+            <span class="proj-tag">DAX</span>
+            <span class="proj-tag">Data Modelling</span>
+            <span class="proj-tag">Excel</span>
+            <span class="proj-tag">Retail Analytics</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/delwynluu/Data-Analysis-PowerBI-Dashboard" target="_blank" class="proj-link proj-link-secondary">📁 GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── DOMAIN 4: BUSINESS ANALYSIS ── -->
+    <div class="domain-section fade-in">
+      <div class="domain-header">
+        <span class="domain-badge ba">🏢 Business Analysis &amp; Market Research</span>
+        <div class="domain-line"></div>
+      </div>
+
+      <div class="proj-card ba-card">
+        <div class="proj-card-header">
+          <div class="proj-title-row">
+            <div class="proj-title">Saint Ann's School — NSW Market Feasibility Study</div>
+            <span class="proj-status status-done">✓ Completed</span>
+          </div>
+          <p class="proj-desc">
+            A three-phase market entry feasibility study for Saint Ann's School's expansion into NSW, Australia. Using ABS demographic data, competitor mapping, and weighted scoring, the team narrowed 2,500+ suburban areas down to a single final location recommendation — with full evidence backing.
+          </p>
+        </div>
+
+        <div class="rar-section">
+          <div class="rar-row">
+            <span class="rar-label rar-role">Role</span>
+            <div class="rar-text">Business Analyst in a <strong>6-person team (G03)</strong> — led data analysis in Phase 3, contributed to scoring methodology and final client presentations.</div>
+          </div>
+          <div class="rar-row">
+            <span class="rar-label rar-action">Actions</span>
+            <div class="rar-text">
+              <strong>Phase 1:</strong> Screened 2,500+ SA2 suburb areas using ABS demographic filters → shortlisted ~100 candidates.<br>
+              <strong>Phase 2:</strong> Applied weighted scoring model to narrow to 3 clusters: Hills District, Upper North Shore, Lower North Shore.<br>
+              <strong>Phase 3:</strong> Validated all 3 clusters across 5 dimensions — household income, competitor landscape, transport, political landscape, age distribution. Delivered 3 formal presentations + final recommendation report.
+            </div>
+          </div>
+          <div class="rar-row">
+            <span class="rar-label rar-result">Results</span>
+            <div class="rar-text">Final recommendation: <strong>Lower North Shore</strong> — 8,639 households, 16.75% high-income bracket, zero bridge toll barrier, progressive community stance, excellent public transport. Backed by full quantitative and qualitative evidence across all 5 dimensions.</div>
+          </div>
+        </div>
+
+        <div class="proj-footer">
+          <div class="proj-tags">
+            <span class="proj-tag">ABS TableBuilder</span>
+            <span class="proj-tag">Market Research</span>
+            <span class="proj-tag">Feasibility Analysis</span>
+            <span class="proj-tag">Excel</span>
+            <span class="proj-tag">Competitor Mapping</span>
+            <span class="proj-tag">Demographic Analysis</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/delwynluu/Saint-Ann-s-School-Australia-Feasibility-Market-Entry-Analysis" target="_blank" class="proj-link proj-link-ba">📁 View on GitHub</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════ EDUCATION ═══════════════════════ -->
+<section id="education">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-label">// academic background</div>
+      <h2 class="section-title">Education</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="edu-grid fade-in">
+
+      <div class="edu-card">
+        <div class="edu-degree">Bachelor of Business Analytics</div>
+        <div class="edu-school">Deakin University — Melbourne, Australia</div>
+        <div class="edu-year">2021 – 2023</div>
+        <div class="edu-wam">
+          <span class="edu-wam-num">WAM 77</span>
+          <span class="edu-wam-label">Weighted Average Mark</span>
+        </div>
+        <div class="edu-units">
+          <span class="edu-unit">Business Statistics</span>
+          <span class="edu-unit">Data Management</span>
+          <span class="edu-unit">Marketing Analytics</span>
+          <span class="edu-unit">MIS &amp; Strategy</span>
+          <span class="edu-unit">Decision Analytics</span>
+          <span class="edu-unit">Capstone Consulting</span>
+        </div>
+      </div>
+
+      <div class="edu-card">
+        <div class="edu-degree">Diploma of Information Technology</div>
+        <div class="edu-school">Deakin University — Melbourne, Australia</div>
+        <div class="edu-year">2020 – 2021</div>
+        <div class="edu-wam">
+          <span class="edu-wam-num">WAM 80</span>
+          <span class="edu-wam-label">Weighted Average Mark</span>
+        </div>
+        <div class="edu-units">
+          <span class="edu-unit">Programming Fundamentals</span>
+          <span class="edu-unit">Systems Analysis</span>
+          <span class="edu-unit">Web Development</span>
+          <span class="edu-unit">Database Design</span>
+          <span class="edu-unit">Network Basics</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ CONTACT ═══════════════════════ -->
+<section id="contact">
+  <div class="container">
+    <div class="fade-in">
+      <div class="section-label">// let's connect</div>
+      <h2 class="section-title">Get in Touch</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="contact-grid fade-in">
+      <div>
+        <div class="contact-text">
+          <h3>Open to Data, Business &amp; IT/AI Roles</h3>
+          <p>
+            I'm actively looking for full-time or internship roles — Data Analyst, Business Analyst, BI Analyst, IT/AI Consultant, or entry-level Data Engineer — in <strong>Australia</strong> (Melbourne) or <strong>Vietnam</strong>. If you're working on something interesting with data or AI, I'd love to hear about it.
+          </p>
+          <p>
+            On a 485 Graduate Visa, valid through 2028. Available immediately.
+          </p>
+        </div>
+        <div class="contact-items">
+          <a href="mailto:delwynluu@gmail.com" class="contact-item">
+            <span class="contact-icon">📧</span>
+            <div>
+              <div class="contact-label">Email</div>
+              <div class="contact-val">delwynluu@gmail.com</div>
+            </div>
+          </a>
+          <a href="https://www.linkedin.com/in/delwyn-luu-234286248/" target="_blank" class="contact-item">
+            <span class="contact-icon">💼</span>
+            <div>
+              <div class="contact-label">LinkedIn</div>
+              <div class="contact-val">linkedin.com/in/delwyn-luu</div>
+            </div>
+          </a>
+          <a href="https://github.com/delwynluu" target="_blank" class="contact-item">
+            <span class="contact-icon">🐙</span>
+            <div>
+              <div class="contact-label">GitHub</div>
+              <div class="contact-val">github.com/delwynluu</div>
+            </div>
+          </a>
+          <a href="DELWYNLUU.DA.pdf" download class="contact-item">
+            <span class="contact-icon">📄</span>
+            <div>
+              <div class="contact-label">Resume</div>
+              <div class="contact-val">Download PDF</div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <h4>Send a Message</h4>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" placeholder="Your name" />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="your@email.com" />
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom:.8rem">
+          <label>Subject</label>
+          <input type="text" placeholder="Job opportunity / Collaboration / etc." />
+        </div>
+        <div class="form-group" style="margin-bottom:1rem">
+          <label>Message</label>
+          <textarea placeholder="Tell me about the role or project..."></textarea>
+        </div>
+        <button class="btn btn-primary btn-full" onclick="window.location='mailto:delwynluu@gmail.com'">
+          Send Message →
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+<footer>
+  <div class="container">
+    <p>Built by <span>Delwyn Luu</span> · Melbourne, Australia · <span>Open to Work 🟢</span></p>
+    <p style="margin-top:.4rem; font-size:.78rem">
+      <a href="https://github.com/delwynluu" style="color:var(--muted);text-decoration:none;margin:0 .5rem">GitHub</a> ·
+      <a href="https://www.linkedin.com/in/delwyn-luu-234286248/" style="color:var(--muted);text-decoration:none;margin:0 .5rem">LinkedIn</a> ·
+      <a href="DELWYNLUU.DA.pdf" download style="color:var(--muted);text-decoration:none;margin:0 .5rem">Resume</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+  // Scroll fade-in
+  const els = document.querySelectorAll('.fade-in');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(el => obs.observe(el));
+
+  // Nav active state
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 100) current = s.id;
+    });
+    links.forEach(l => {
+      l.style.color = l.getAttribute('href') === '#' + current
+        ? 'var(--accent)' : '';
+    });
+  });
+</script>
+</body>
+</html>
