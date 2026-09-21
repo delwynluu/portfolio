@@ -520,6 +520,40 @@ html{font-size:clamp(16px,calc(8px + .6vw),21px)}
 .edu-link{margin-top:.9rem;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700;text-decoration:none}
 .edu-link:hover{text-decoration:underline}
 
+/* compact v3 */
+.title{font-size:clamp(2.6rem,6.5vw,80px)}
+.split-text h3{font-size:clamp(2rem,3.6vw,48px)}
+.ch-title{font-size:clamp(1.7rem,3vw,40px)}
+.hero-name{margin-top:.6rem}
+.hero-row{margin-top:2rem}
+.offclock-wrap{margin-top:3.5rem}
+.oc-head{border-top:1px solid var(--line-c);padding-top:1rem}
+.oc-head .caps{font-size:.72rem;opacity:.8}
+.offclock-wrap .offclock{grid-template-columns:1fr 1fr;gap:1.4rem;margin-top:1.2rem}
+.offclock-wrap .card{padding:1.4rem;color:var(--blue)}
+.offclock-wrap .card h3{font-size:clamp(1.5rem,2.2vw,30px);margin:.3rem 0 .6rem}
+.offclock-wrap .card p{font-size:.92rem}
+.offclock-wrap .tt-grid{margin:1rem 0 0}
+.offclock-wrap .sol-grid{margin:1rem 0}
+.offclock-wrap .sol-grid .sol-main{aspect-ratio:16/9}
+.offclock-wrap .chips{margin-top:1.4rem}
+.offclock-wrap .chips .pill{border-color:var(--line-c)}
+@media (max-width:900px){.offclock-wrap .offclock{grid-template-columns:1fr}}
+.offclock-wrap .sol-grid{grid-template-columns:1.4fr 1fr;grid-template-rows:1fr 1fr;gap:.5rem}
+.offclock-wrap .sol-grid img{aspect-ratio:auto;height:100%;min-height:0}
+.offclock-wrap .sol-grid .sol-main{grid-column:1;grid-row:1/3;aspect-ratio:auto;object-position:center 25%}
+.offclock-wrap .sol-grid{height:clamp(220px,22vw,360px)}
+.offclock-wrap .tt-grid img{height:clamp(220px,22vw,360px);object-fit:cover;object-position:top}
+
+/* chapter photos */
+.chapter{grid-template-columns:minmax(180px,240px) 1fr 1.1fr;align-items:center}
+.ch-photo{position:relative;aspect-ratio:4/3;overflow:hidden;border:1px solid var(--line-c)}
+.ch-photo img{width:100%;height:100%;object-fit:cover;cursor:zoom-in;transition:transform .5s}
+.ch-photo:hover img{transform:scale(1.04)}
+.ch-n{position:absolute;left:.6rem;bottom:.3rem;font-family:var(--serif);font-variation-settings:"opsz" 100;font-size:2.4rem;line-height:1;color:var(--cream);text-shadow:0 2px 10px rgba(0,0,0,.45)}
+.ch-cred{position:absolute;right:.4rem;bottom:.3rem;font-size:.55rem;color:var(--cream);opacity:.85;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+@media (max-width:900px){.chapter{grid-template-columns:1fr}.ch-photo{max-width:420px}}
+
 </style>
 </head>
 <body>
@@ -614,7 +648,7 @@ html{font-size:clamp(16px,calc(8px + .6vw),21px)}
 
     <div class="chapters">
       <article class="chapter rise">
-        <div class="ch-num">I.</div>
+        <figure class="ch-photo"><img src="images/ch-pleiku.jpg" alt="Sunset over fields and wind turbines near Pleiku" data-zoom /><span class="ch-n">I.</span></figure>
         <div>
           <div class="ch-place caps">Pleiku · Gia Lai · where I’m from</div>
           <h3 class="ch-title">Shaped by the land I grew up in</h3>
@@ -625,7 +659,7 @@ html{font-size:clamp(16px,calc(8px + .6vw),21px)}
       </article>
 
       <article class="chapter rise">
-        <div class="ch-num">II.</div>
+        <figure class="ch-photo"><img src="images/ch-saigon.jpg" alt="High school graduation at the Saigon Central Post Office" data-zoom /><span class="ch-n">II.</span><span class="ch-cred">Photo: Vin Media</span></figure>
         <div>
           <div class="ch-place caps">Ho Chi Minh City · 2020 – 2022</div>
           <h3 class="ch-title">Not knowing how it would end</h3>
@@ -636,7 +670,7 @@ html{font-size:clamp(16px,calc(8px + .6vw),21px)}
       </article>
 
       <article class="chapter rise">
-        <div class="ch-num">III.</div>
+        <figure class="ch-photo"><img src="images/ch-melbourne.jpg" alt="Giant chess outside the State Library Victoria, Melbourne" data-zoom /><span class="ch-n">III.</span></figure>
         <div>
           <div class="ch-place caps">Melbourne · 2023 – now</div>
           <h3 class="ch-title">Building from scratch</h3>
@@ -661,18 +695,11 @@ html{font-size:clamp(16px,calc(8px + .6vw),21px)}
       <div class="belief"><span class="n caps">Strength</span><h4>Quietly collaborative</h4><p>I work best alongside people, not in front of them: listening first, then building something that actually helps them day to day.</p></div>
       <div class="belief"><span class="n caps">Working on</span><h4>Speaking up</h4><p>I tend to let my work talk and undersell what I’ve done. This portfolio is me practising the opposite.</p></div>
     </div>
-  </div>
-</section>
-
-<!-- ============ OFF THE CLOCK ============ -->
-<section class="sec" id="offclock">
-  <div class="wrap">
-    <div class="sec-head caps"><span>Chapter two</span><span>Off the clock</span><span>02</span></div>
-    <span class="kicker rise">and when I’m not working,</span>
-    <h2 class="title rise">Stories I tell for fun</h2>
-
-    <div class="offclock">
-      <article class="card rise">
+  
+    <div class="offclock-wrap rise">
+      <div class="oc-head"><span class="caps">Off the clock</span></div>
+      <div class="offclock">
+      <article class="card">
         <span class="caps" style="font-size:.66rem;opacity:.75">TikTok · Melbourne life</span>
         <h3>Every place has its own story, if we look closely</h3>
         <p>Noticing the small things in life matters to me. So I film them: a café find, a new dish, a street I haven’t walked yet.</p>
@@ -680,7 +707,7 @@ html{font-size:clamp(16px,calc(8px + .6vw),21px)}
         
       </article>
 
-      <article class="card rise">
+      <article class="card">
         <span class="caps" style="font-size:.66rem;opacity:.75">Sing Out Loud 2022 · Swinburne Vietnam</span>
         <h3>Doing the thing I love, out loud</h3>
         <div class="sol-grid">
@@ -692,9 +719,9 @@ html{font-size:clamp(16px,calc(8px + .6vw),21px)}
         <div class="badges"><span class="pill">🏆 Most Favourite Contestant</span><span class="pill">Top 10 · Audience vote</span></div>
       </article>
     </div>
-
-    <div class="chips rise">
+      <div class="chips">
       <span class="pill">📍 Melbourne</span><span class="pill">☕ Café hopping</span><span class="pill">🎤 Singing</span><span class="pill">🎬 Filming daily life</span><span class="pill">🌸 Spring city walks</span><span class="pill">📊 Self-studying data</span>
+    </div>
     </div>
   </div>
 </section>
@@ -702,7 +729,7 @@ html{font-size:clamp(16px,calc(8px + .6vw),21px)}
 <!-- ============ TOOLKIT ============ -->
 <section class="sec on-blue-sec" id="toolkit">
   <div class="wrap">
-    <div class="sec-head caps"><span>Chapter three</span><span>Skills &amp; tools</span><span>03</span></div>
+    <div class="sec-head caps"><span>Chapter two</span><span>Skills &amp; tools</span><span>02</span></div>
     <span class="kicker rise">now, the practical part,</span>
     <h2 class="title rise">What I bring to the table</h2>
     <p class="toolkit-intro rise">I’ve built up business analysis and data skills, and I use AI tools to help me work better. Here’s what that looks like:</p>
@@ -729,7 +756,7 @@ html{font-size:clamp(16px,calc(8px + .6vw),21px)}
 <!-- ============ WORK ============ -->
 <section class="sec" id="work">
   <div class="wrap">
-    <div class="sec-head caps"><span>Chapter four</span><span>Professional experience</span><span>04</span></div>
+    <div class="sec-head caps"><span>Chapter three</span><span>Professional experience</span><span>03</span></div>
     <span class="kicker rise">where I’ve put it to work,</span>
     <h2 class="title rise">Where I’ve worked</h2>
 
@@ -745,17 +772,12 @@ html{font-size:clamp(16px,calc(8px + .6vw),21px)}
           <div><span>03 Model</span><span>S3, a Glue catalogue and Athena, with 4 reusable SQL views (<code>deals_clean</code>, <code>deals_latest</code>, <code>deals_simplified_v2</code>, an owner view) as a stable layer between raw data and the dashboard.</span></div>
           <div><span>04 Show</span><span>A multi-page QuickSight dashboard: KPI cards and year-on-year trend, revenue by stage and by state, a program-details table for checking records, quarter views and a sales matrix, all filterable by year, owner, state and stage.</span></div>
         </div>
-        <blockquote class="call">
-          <span class="caps">A call I made</span>
-          <p>I kept the original CRM stage names instead of collapsing them into Won / Lost / Pipeline. Labels like “Cancelled by client” and “Cancelled by Cultural Infusion” carry different meaning, and grouping them would have changed what the numbers said.</p>
-        </blockquote>
         <div class="kpi-row">
           <div><b>10+ yrs</b><span>CRM history in one place (2015 – 2026)</span></div>
           <div><b>257</b><span>Delivered programs, reportable in seconds</span></div>
           <div><b>6</b><span>States, filterable on one page</span></div>
           <div><b>0</b><span>Weekly reports rebuilt by hand</span></div>
         </div>
-        <p class="honest"><b>What I didn’t ship:</b> I also tested revenue forecasting (MAE / RMSE), but the data was too volatile and mixed across stages to trust. I documented why and kept it out of the production dashboard rather than hand leaders a number I couldn’t stand behind.</p>
         <div class="tags"><span class="tag">Python</span><span class="tag">AWS Lambda</span><span class="tag">EventBridge</span><span class="tag">S3</span><span class="tag">Glue</span><span class="tag">Athena · SQL</span><span class="tag">QuickSight</span><span class="tag">Zoho CRM API</span><span class="tag">OAuth 2.0</span></div>
         <div class="links"><a class="btn ghost" href="https://github.com/delwynluu/zoho_crm_culturalinfusion" target="_blank" rel="noopener">View repository ↗</a></div>
       </div>
@@ -830,7 +852,7 @@ html{font-size:clamp(16px,calc(8px + .6vw),21px)}
 <!-- ============ PROJECTS ============ -->
 <section class="sec" id="projects" style="padding-top:0">
   <div class="wrap">
-    <div class="sec-head caps"><span>Chapter five</span><span>Selected projects</span><span>05</span></div>
+    <div class="sec-head caps"><span>Chapter four</span><span>Selected projects</span><span>04</span></div>
     <span class="kicker rise">and the things I’ve made along the way,</span>
     <h2 class="title rise">Work I’m proud of</h2>
 
@@ -951,7 +973,7 @@ html{font-size:clamp(16px,calc(8px + .6vw),21px)}
 <!-- ============ CREDENTIALS ============ -->
 <section class="sec" id="credentials" style="background:var(--cream-2)">
   <div class="wrap">
-    <div class="sec-head caps"><span>Chapter six</span><span>Degrees &amp; certificates</span><span>06</span></div>
+    <div class="sec-head caps"><span>Chapter five</span><span>Degrees &amp; certificates</span><span>05</span></div>
     <div class="cert-top">
       <div>
         <span class="kicker rise">the paper trail,</span>
@@ -1032,7 +1054,7 @@ html{font-size:clamp(16px,calc(8px + .6vw),21px)}
 <script>
 /* make the giant name fill the width exactly, whatever the screen */
 const hn=document.querySelector('.hero-name');
-function fitName(){hn.style.fontSize='100px';const cs=getComputedStyle(hn.parentElement);const w=hn.parentElement.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);hn.style.fontSize=(100*w/hn.scrollWidth*0.995)+'px'}
+function fitName(){hn.style.fontSize='100px';const cs=getComputedStyle(hn.parentElement);const w=hn.parentElement.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);hn.style.fontSize=Math.min(100*w*0.6/hn.scrollWidth,300)+'px'}
 (document.fonts?document.fonts.ready:Promise.resolve()).then(fitName);window.addEventListener('resize',fitName);fitName();
 /* reveal on scroll */
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
@@ -1045,7 +1067,7 @@ function onScroll(){
   const y=window.scrollY+70;let cur=secs[0];
   secs.forEach(s=>{if(s.offsetTop<=y)cur=s});
   nav.classList.toggle('on-blue',cur.classList.contains('on-blue-sec'));
-  const map={offclock:'story'};const id=map[cur.id]||cur.id;
+  const map={};const id=map[cur.id]||cur.id;
   links.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+id));
 }
 window.addEventListener('scroll',onScroll,{passive:true});onScroll();
