@@ -1064,6 +1064,12 @@ html{font-size:clamp(16px,calc(8px + .6vw),21px)}
 const hn=document.querySelector('.hero-name');
 function fitName(){hn.style.fontSize='100px';const cs=getComputedStyle(hn.parentElement);const w=hn.parentElement.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);hn.style.fontSize=Math.min(100*w*0.6/hn.scrollWidth,300)+'px'}
 (document.fonts?document.fonts.ready:Promise.resolve()).then(fitName);window.addEventListener('resize',fitName);fitName();
+
+/* count resume downloads in GoatCounter */
+document.querySelectorAll('a[href$=".pdf"]').forEach(a=>a.addEventListener('click',()=>{
+  const n=a.getAttribute('href').includes('.DA.')?'resume-da':'resume-ba';
+  try{window.goatcounter&&window.goatcounter.count({path:n,title:'Resume download ('+n.slice(-2).toUpperCase()+')',event:true})}catch(e){}
+}));
 /* reveal on scroll */
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.rise').forEach(el=>io.observe(el));
@@ -1120,5 +1126,6 @@ document.getElementById('letter').onsubmit=e=>{
   location.href='mailto:delwynluu@gmail.com?subject='+encodeURIComponent(s)+'&body='+encodeURIComponent('Dear Thư,\n\n'+m+'\n\nFrom, '+n);
 };
 </script>
+<script data-goatcounter="https://delwynluu.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
